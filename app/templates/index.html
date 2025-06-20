@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Selamat Datang di Catatan!</h1>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+  <strong>{{ message }}!</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endwith %}
+
+<p class="lead">Hello {{ user.username }}</p>
+
+  {% if notes %}
+  {% for note in notes %}
+  <div class="card mt-3">
+    <div class="card-body">
+      {{ note.notes[:100] }}...<a href="/note/{{ note.id }}">Lihat selengkapnya</a>
+      <div class="d-flex mt-3">
+      <form method="POST" action="/delete/{{ note.id }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" name="submit" class="btn btn-danger px-2" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+      </form>
+      <div class="px-2">
+      <a href="/update/{{ note.id }}" class="btn btn-warning">Edit</a>
+      </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p class="lead">Tidak ada catatan</p>
+  {% endif %}
+
+{% endblock %}

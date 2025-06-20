@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  </head>
+  <body class="container">
+    <h1>Register Page</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+      <strong>{{ message }}!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endwith %}
+    
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      
+      <p>{{ form.username.label(class="form-label") }}</p>
+      <p>{{ form.username(size=32, class="form-control") }}</p>
+      {% for error in form.username.errors %}
+      <p><span style="color:red">{{ error }}</span></p>
+      {% endfor %}
+      
+      <p>{{ form.password.label(class="form-label") }}</p>
+      <p>{{ form.password(size=32, class="form-control") }}</p>
+      {% for error in form.password.errors %}
+      <p><span style="color:red">{{ error }}</span></p>
+      {% endfor %}
+      
+      <p>{{ form.confirm_password.label(class="form-label") }}</p>
+      <p>{{ form.confirm_password(size=32, class="form-control") }}</p>
+      {% for error in form.confirm_password.errors %}
+      <p><span style="color:red">{{ error }}</span></p>
+      {% endfor %}
+      
+      {{ form.submit(class="btn btn-primary") }}
+      
+      <p class="lead">Sudah punya akun? <a href="/auth/login">Log In</a></p>
+      
+    </form>
+  </body>
+</html>

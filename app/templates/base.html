@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  </head>
+  <body>
+    {% include "partials/header.html" %}
+    
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+    
+    {% include "partials/footer.html" %}
+  </body>
+</html>
