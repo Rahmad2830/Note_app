@@ -12,11 +12,13 @@ Flask-WTF==1.2.2
 frozenlist==1.7.0
 future==1.0.0
 greenlet==3.2.2
+gunicorn==23.0.0
 idna==3.10
 itsdangerous==2.2.0
 Jinja2==3.1.6
 MarkupSafe==3.0.2
 multidict==6.4.4
+packaging==25.0
 propcache==0.3.2
 PyJWT==2.10.1
 PyMySQL==1.1.1
