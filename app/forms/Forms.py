@@ -1,16 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField, TextAreaField
+from wtforms import StringField, IntegerField, SubmitField, TextAreaField, PasswordField
 from wtforms.validators import DataRequired, Length, EqualTo
 
 class LoginForm(FlaskForm):
   username = StringField('Username', [DataRequired(), Length(min=3)])
-  password = StringField('Password', [DataRequired(), Length(min=3)])
+  password = PasswordField('Password', [DataRequired()])
   submit = SubmitField('login')
   
 class RegisterForm(FlaskForm):
   username = StringField('Username', [DataRequired(), Length(min=3)])
-  password = StringField('Password', [DataRequired(), Length(min=3)])
-  confirm_password = StringField('Confirm Password', [DataRequired(), EqualTo('password', message='password must be match')])
+  password = PasswordField('Password', [DataRequired(), Length(min=3)])
+  confirm_password = PasswordField('Confirm Password', [DataRequired(), EqualTo('password', message='password must be match')])
   submit = SubmitField('login')
   
 class NoteForm(FlaskForm):
