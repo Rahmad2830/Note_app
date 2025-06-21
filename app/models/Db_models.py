@@ -12,8 +12,8 @@ class Base(DeclarativeBase):
 class User(Base, UserMixin):
   __tablename__='user'
   id=Column(Integer, primary_key=True, autoincrement=True)
-  username=Column(String(100))
-  password=Column(String(100))
+  username=Column(String(100), unique=True, nullable=False)
+  password=Column(String(255))
   
   notes = relationship('Notes', back_populates='user')
   

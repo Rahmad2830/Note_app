@@ -31,8 +31,14 @@ def register():
   if form.validate_on_submit():
     username = form.username.data
     password = form.password.data
-    hashed = generate_password_hash(password)
     data = Crud(session)
+    
+    exist_user = data.read_by_id(User, 'username', username)
+    if exist_user:
+      flash("Username sudah ada, silakan gunakan yang lain", "danger")
+      return render_template('register.html', form=form)
+    
+    hashed = generate_password_hash(password)
     user = User(
         username = username,
         password = hashed
